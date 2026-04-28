@@ -1,0 +1,17 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Node (if using npm for tooling)
+node_modules/
+
+# Build output (if you add build tools later)
+dist/
+build/

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - tib.best</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="container nav-content">
+            <div class="nav-tabs">
+                <a href="/" class="nav-tab">Home</a>
+                <a href="projects.html" class="nav-tab active">Projects</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="projects">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="bento-grid">
+                    <article class="project-card" id="deci-mate">
+                        <h3>deci-mate</h3>
+                        <div class="project-content">
+                            <div class="loading">
+                                <div class="loading-dot"></div>
+                                <div class="loading-dot"></div>
+                                <div class="loading-dot"></div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card" id="political-struggle">
+                        <h3>Political Struggle</h3>
+                        <div class="project-content">
+                            <div class="loading">
+                                <div class="loading-dot"></div>
+                                <div class="loading-dot"></div>
+                                <div class="loading-dot"></div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 tib.best</p>
+        </div>
+    </footer>
+
+    <script>
+        async function loadContent() {
+            const files = {
+                '#deci-mate .project-content': 'content/deci-mate.html',
+                '#political-struggle .project-content': 'content/political-struggle.html'
+            };
+
+            const entries = Object.entries(files);
+            const fetches = entries.map(([selector, file]) =>
+                fetch(file)
+                    .then(res => res.text())
+                    .then(html => ({ selector, html }))
+                    .catch(error => {
+                        console.error(`Error loading ${file}:`, error);
+                        return null;
+                    })
+            );
+
+            const results = await Promise.all(fetches);
+            results.forEach(result => {
+                if (result) {
+                    const element = document.querySelector(result.selector);
+                    if (element) {
+                        element.innerHTML = result.html;
+                    }
+                }
+            });
+        }
+
+        loadContent();
+    </script>
+</body>
+</html>
